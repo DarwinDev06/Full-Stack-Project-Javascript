@@ -13,9 +13,14 @@ const productList = []
 
 const cardsContainer = document.querySelector('.cards-container')
 
+const productDetailsContainer = document.querySelector('#product-details')
+const productDetailsClose = document.querySelector('.product-details-close')
+
 menuEmail.addEventListener('click', toggleDesktopMenu)
 burgerMenu.addEventListener('click', toggleMobileMenu)
 shopingCart.addEventListener('click', showProductDetails)
+productDetailsClose.addEventListener('click', closeProductDetails)
+
 
 function toggleDesktopMenu(){
     const isAsideClose = shoppingCartContainer.classList.contains('inactive')
@@ -23,6 +28,8 @@ function toggleDesktopMenu(){
     if(!isAsideClose){
         shoppingCartContainer.classList.add('inactive')
     }
+
+    closeProductDetails()
 
     desktopMenu.classList.toggle('inactive')
     
@@ -34,6 +41,8 @@ function toggleMobileMenu(){
     if(!isAsideClose){
         shoppingCartContainer.classList.add('inactive')
     }
+
+    closeProductDetails()
 
     mobileMenu.classList.toggle('inactive')
 
@@ -47,10 +56,23 @@ function showProductDetails(){
         mobileMenu.classList.add('inactive')
         desktopMenu.classList.add('inactive')
     }
+    
+    closeProductDetails()
 
     shoppingCartContainer.classList.toggle('inactive')
 }
 
+function openProductDetails(){
+    const isAsideClose = shoppingCartContainer.classList.add('inactive')
+    const isMenudeskClose = desktopMenu.classList.add('inactive')
+    
+    productDetailsContainer.classList.remove('inactive')
+
+}
+
+function closeProductDetails (){
+    productDetailsContainer.classList.add('inactive')
+}
 
 productList.push({
     name: "Bike",
@@ -79,6 +101,7 @@ function cargarProductos(array) {
     
         const productImg = document.createElement('img')
         productImg.setAttribute('src',product.image)
+        productImg.addEventListener('click', openProductDetails)
 
         const productInfo = document.createElement('div')
         productInfo.classList.add('product-info')
@@ -91,8 +114,6 @@ function cargarProductos(array) {
         const productName = document.createElement('p')
         productName.innerText = product.name
 
-        
-    
         const productInfoFigure = document.createElement('figure')
 
         const productIconCart = document.createElement('img')
