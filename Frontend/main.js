@@ -7,7 +7,7 @@ const burgerMenu = document.querySelector('.menu')
 const mobileMenu = document.querySelector('.mobile-menu')
 
 const shopingCart = document.querySelector('.navbar-shoping-cart')
-const aside = document.querySelector('.product-details')
+const shoppingCartContainer = document.querySelector('#shopping-cart-container')
 
 const productList = []
 
@@ -18,10 +18,10 @@ burgerMenu.addEventListener('click', toggleMobileMenu)
 shopingCart.addEventListener('click', showProductDetails)
 
 function toggleDesktopMenu(){
-    const isAsideClose = aside.classList.contains('inactive')
+    const isAsideClose = shoppingCartContainer.classList.contains('inactive')
 
     if(!isAsideClose){
-        aside.classList.add('inactive')
+        shoppingCartContainer.classList.add('inactive')
     }
 
     desktopMenu.classList.toggle('inactive')
@@ -29,10 +29,10 @@ function toggleDesktopMenu(){
 }
 
 function toggleMobileMenu(){
-    const isAsideClose = aside.classList.contains('inactive')
+    const isAsideClose = shoppingCartContainer.classList.contains('inactive')
 
     if(!isAsideClose){
-        aside.classList.add('inactive')
+        shoppingCartContainer.classList.add('inactive')
     }
 
     mobileMenu.classList.toggle('inactive')
@@ -48,7 +48,7 @@ function showProductDetails(){
         desktopMenu.classList.add('inactive')
     }
 
-    aside.classList.toggle('inactive')
+    shoppingCartContainer.classList.toggle('inactive')
 }
 
 
@@ -69,19 +69,6 @@ productList.push({
     price: 150,
     image: "https://images.pexels.com/photos/3780681/pexels-photo-3780681.jpeg?auto=compress&cs=tinysrgb&w=600"
 })
-/* <!-- <div class="product-card">
-<img src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" class="product-img">
-<div class="product-info">
-    <div>
-        <p>$120,00</p>
-        <p>Bikes</p>
-    </div>
-    <figure>
-        <img src="./assets/icons/bt_add_to_cart.svg" alt="icon-add-to-car">
-    </figure>
-</div>
-</div> --> */
-
 
 
 function cargarProductos(array) {
@@ -92,7 +79,7 @@ function cargarProductos(array) {
     
         const productImg = document.createElement('img')
         productImg.setAttribute('src',product.image)
-    
+
         const productInfo = document.createElement('div')
         productInfo.classList.add('product-info')
     
@@ -107,9 +94,11 @@ function cargarProductos(array) {
         
     
         const productInfoFigure = document.createElement('figure')
+
         const productIconCart = document.createElement('img')
         productIconCart.setAttribute('src', './assets/icons/bt_add_to_cart.svg')
     
+        //se realiza la inyeccion de html de adentro hacia afuera 
         productInfoFigure.appendChild(productIconCart)
     
         productInfoDivP.append(productPrice, productName )
@@ -119,7 +108,6 @@ function cargarProductos(array) {
         productCard.append(productImg,productInfo)
         
         cardsContainer.appendChild(productCard)
-
         
     }
 }
