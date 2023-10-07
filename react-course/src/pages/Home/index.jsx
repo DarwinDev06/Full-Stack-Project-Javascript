@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import { Layout } from "../../components/Layout"
 import { Card } from "../../components/Card"
+import { ProductDetail } from "../../components/ProductDetail"
 
 function Home() {
 
-  const [item, setItem] = React.useState(null)
+  const [item, setItem] = useState(null)
 
   useEffect(() => {
     fetch('https://api.escuelajs.co/api/v1/products')
@@ -16,7 +17,7 @@ function Home() {
     <>
       <Layout>
         Home
-        <div className='grid gpa-4 grid-cols-4 w-full max-w-screen-lg '>
+        <div className='grid gap-4 grid-cols-4 w-full max-w-screen-lg'>
           {
             // por cada item pinta una card
             item?.map((item)=>(
@@ -27,8 +28,7 @@ function Home() {
             ))
           }
         </div>
-        
-        
+        <ProductDetail/>
       </Layout>
     </>
   )
