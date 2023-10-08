@@ -1,11 +1,12 @@
 
 /* import '../productDetail.css' */
 import { useContext } from 'react'
+import { Link } from 'react-router-dom'
 import { XMarkIcon } from '@heroicons/react/24/solid' 
-import './style.css'
 import { ShoppingCartContext } from '../../Context'
 import { OrderCard } from '../OrderCard'
 import { totalPrice } from '../../utils'
+import './style.css'
 
 const CheckoutSideMenu = () => {
 
@@ -14,6 +15,19 @@ const CheckoutSideMenu = () => {
     const handleDelete = (id) => {
         const filterProducts = context.cartProducts.filter(product => product.id != id)
         context.setCartProducts(filterProducts)
+    }
+
+    const handleCheckout = () => {
+        const orderToAdd = {
+            date: '07.10.2023',
+            products: context.cartProducts,
+            totalProducts: context.cartProducts.length,
+            totalPrice: totalPrice(context.cartProducts)
+        }
+
+        context.setOrder([...context.order, orderToAdd])
+        context.setCartProducts([])
+        context.setCount(0)
     }
 
     return (
@@ -26,7 +40,7 @@ const CheckoutSideMenu = () => {
                         onClick={() => context.closeCheckoutSideMenu()} />
                 </div>
             </div>
-            <div className='px-6 overflow-y-scroll'>
+            <div className='px-6 overflow-y-scroll flex-1'>
                 {
                     context.cartProducts.map( product => (
                         <OrderCard
@@ -40,11 +54,19 @@ const CheckoutSideMenu = () => {
                     ))
                 }
             </div>
-            <div className='px-6'>
-                <p className='flex justify-between items-center'>
+            <div className='px-6 mb-6'>
+                <p className='flex justify-between items-center mb-2'>
                     <span className='font-lingth'> Total:  </span>
                     <span className='font-medium text-2xl'> ${ totalPrice(context.cartProducts) } </span>
                 </p>
+                <Link to='/my-orders/last'>
+                    <button 
+                        className='bg-black py-3 text-white  w-full rounded-lg' 
+                        onClick={() => handleCheckout()}>
+                        Checkout
+                    </button>
+                </Link>
+                
             </div>
         </aside>
     )

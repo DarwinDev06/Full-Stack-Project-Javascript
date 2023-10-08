@@ -1,0 +1,26 @@
+
+import { ChevronRightIcon } from '@heroicons/react/24/solid' 
+
+const OrdersCard = props => {
+
+    const {totalPrice, totalProducts} = props
+
+    return (
+        
+        <div className='flex justify-between items-center border border-black rounded-lg w-80 p-4 mb-3 '>
+           <div className='flex justify-between w-full items-center'>
+                <p className='flex flex-col'>
+                    <span className='font-ligth'> 07.20.2023 </span>
+                    <span className='font-ligth'> {totalProducts} articles </span>
+                </p>
+                
+                <p className='flex items-center gap-2'>
+                    <span className='font-medium text-2xl'> ${totalPrice} </span>
+                    <ChevronRightIcon className='h-6 w-6 text-black cursor-pointer'/>
+                </p>
+           </div>
+        </div>
+    )
+}
+
+export {OrdersCard}
