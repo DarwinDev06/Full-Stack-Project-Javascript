@@ -8,18 +8,24 @@ const NavBar =  () => {
     const activeStyle = 'underline underline-offset-4';
     const context = useContext(ShoppingCartContext)
 
+    console.log('category navbar; ',context.searchByCategory)
+
     return (
         <nav className='flex justify-between items-center fixed z-10 top-0 w-full py-5 px-8 text-sm font-ligth'>
             <ul className='flex items-center gap-3 '>
                 <li className='font-semibold text-lg'>
-                    <NavLink  to='/'>
+                    <NavLink  
+                        to='/'
+                        onClick={()=> context.setSearchByCategory(null)}
+                    >
                         Shopi
                     </NavLink>
                 </li>
                 <li>
                     <NavLink 
-                        to='/All'
-                        className={({isActive})=>
+                        to='/'
+                        onClick={()=> context.setSearchByCategory(null)}
+                        className={({isActive}) => 
                             isActive ? activeStyle : undefined 
                         }>
                         All
@@ -27,7 +33,8 @@ const NavBar =  () => {
                 </li>
                 <li>
                     <NavLink 
-                        to='/Clothes'
+                        to='/clothes'
+                        onClick={()=> context.setSearchByCategory('clothes')}
                         className={({isActive})=>
                             isActive ? activeStyle : undefined 
                         }>
@@ -36,16 +43,18 @@ const NavBar =  () => {
                 </li>
                 <li>
                     <NavLink 
-                        to='/Electronics'
+                        to='/electronics'
+                        onClick={()=> context.setSearchByCategory('electronics')}
                         className={({isActive})=>
                             isActive ? activeStyle : undefined 
                         }>
-                        Electronics
+                        Electronics 
                     </NavLink>
                 </li>
                 <li>
                     <NavLink 
                         to='/furnitures'
+                        onClick={()=> context.setSearchByCategory('furnitures')}
                         className={({isActive})=>
                             isActive ? activeStyle : undefined 
                         }>
@@ -54,7 +63,8 @@ const NavBar =  () => {
                 </li>
                 <li>
                     <NavLink 
-                        to='/Toys'
+                        to='/toys'
+                        onClick={()=> context.setSearchByCategory('toys')}
                         className={({isActive})=>
                             isActive ? activeStyle : undefined 
                         }>
@@ -63,7 +73,8 @@ const NavBar =  () => {
                 </li>
                 <li>
                     <NavLink 
-                        to='/Others'
+                        to='/others'
+                        onClick={()=> context.setSearchByCategory('others')}
                         className={({isActive})=>
                             isActive ? activeStyle : undefined 
                         }>
@@ -105,7 +116,7 @@ const NavBar =  () => {
                 </li>
                 <li className='flex'>
                     <ShoppingCartIcon className='h-6 w-6 text-black'/>   
-                    <div>{context.count}</div>
+                    <div>{context.cartProducts.length}</div>
                 </li>
             </ul>
         </nav>
